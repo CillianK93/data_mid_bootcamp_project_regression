@@ -22,22 +22,42 @@ Using Tableau enabled us to explore the factors related to the house prices in S
 
 - **Analysis of price and features of houses:** We used distribution plots and scatter plots to analyze what features were indicative of a high house price in our dataset. After exploring the various plots it was discovered that the Grade, No. of bedrooms, bathrooms and square footage of living area had significant impact on houses prices which is to be expected.
 
+<img src='/images/Tableau.png'>
+
+
 ## Jupyter Notebook:
 
 - **Data cleaning:** After the initial look at the dataset, we saw there was no nulls or incomplete sets. We decided to change some columns into objects that were categorical in nature which like bathrooms bedrooms etc.
 
-- **EDA** 
-1. **Distribution:** The distribution of the numerical columns were generally skewed to the right which is normal considering the values they represent either house features or price with outliers present.
+ **EDA** 
+- **Distribution:** The distribution of the numerical columns were generally skewed to the right which is normal considering the values they represent either house features or price with outliers present.
 The distribution of the categorical columns brought further understanding into what the average house in our dataset contained.
-2. **Correlation:** Using a Correlation matrix we discovered high correlation between some of our columns which led us to remove two columns relating to square foot which contained the same info already present in another column.
-3. **Outliers:** With a dataset of the housing market it was usual to see outliers which represented about 5% of our data.
+- **Correlation:** Using a Correlation matrix we discovered high correlation between some of our columns which led us to remove two columns relating to square foot which contained the same info already present in another column.
+- **Outliers:** With a dataset of the housing market it was usual to see outliers which represented about 5% of our data.
 
 - **Benchmark model:** We used three machine learning models LinearRegression, KNeighborsRegressor and MLPRegressor. With LinearRegression performing the best at the benchmark.
 
 <img src='/images/Benchmark.png' width = 700>
 
-- **Feature Engineering and Selection:**
-- Exploring further the differences between sqft living/lot v sqft living15/lot15. The columns living15 and lot15 implied renovations which could mean they a
+ **Feature Engineering and Selection:**
+- We explored further the differences between **sqft_living15/lot15** and **sqft_living/lot**, we wanted to see if they contained the same information and remove **sqft_living/lot**. While this was somewhat true after testing the influence on our ml model we decided to include the two columns.
 
+- We also looked at at **yr_renovated** most houses in our dataset have not been renovated. To represent the column better we converted the column to a boolean if the house was renovated or not.
+
+- **Scaling:** We used test two types of scaling with our dataset, them being Standard Scaler and Log scaling. Out of the two Log scaling performed the best with Linear Regression.
+
+<img src='/images/Log scaled model LR.png'>
+
+- **Outliers**
+Taking into consideration that about 5% of our data contained outliers we decided to also test a model removing outliers to see the results again also comparing Standard Scaler and Log scaling. Here is where we seen a slight decrease in R2 score but a better overall RMSE, MAE and MAPE. this was achieved by log scaling with LinearRegression.
+
+   
+   <img src='/images/No outliers log scale lr.png'>
+
+
+
+#### Conclusion.
+ Overall we believe the final model performs the best when taking in the RMSE, MAE and MAPE but there are pros and cons of removing outliers from a machine learning model that will have to also be taken into consideration. We also showed good results previously with outliers present.
+ **Things to improve on** Maybe further feature selection is needed to improve our model. Also we could look at outliers differently maybe by removing a smaller amount of outliers.
 
 
